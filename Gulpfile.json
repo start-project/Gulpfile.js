@@ -1,0 +1,13 @@
+{
+    "path": {
+        "src": "./src",
+        "root": "./",
+        "dist": "./assets/"
+    },
+    "proxy": {
+        "protocol": "http://",
+        "path": "localhost",
+        "port": 8888
+    },
+    "gitignore": true
+}
