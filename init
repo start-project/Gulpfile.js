@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+
+VERSION='master'
+URL='https://rawgit.com/start-project/Gulpfile.js/'
+
+while test $# -gt 0; do
+    case "$1" in
+        -h|--help)
+            echo "Gulpfile.js installer"
+            echo " "
+            echo "gulpfile [options]"
+            echo " "
+            echo "options:"
+            echo "    -h,           --help                  show brief help"
+            echo "    -v VERSION,   --version=VERSION       specify a version"
+            exit 0
+            ;;
+
+        -v)
+            shift
+            if test $# -gt 0; then
+                VERSION='v'$1
+            else
+                echo "no version specified"
+                exit 1
+            fi
+            shift
+            ;;
+        --version*)
+            VERSION=`echo $1 | sed -e 's/^[^=]*=//g'`
+            if [ ${VERSION} = '--version' || ${VERSION} = '' ]; then
+                echo "no version specified"
+                exit 1
+            else
+                VERSION='v'${VERSION}
+            fi
+            shift
+            ;;
+
+        *)
+            break
+            ;;
+    esac
+done
+
+curl -O $URL$VERSION'/Gulpfile.js'
+curl -O $URL$VERSION'/Gulpfile.json'
+
+
+if [ ! -f "./package.json" ]
+then
+    echo "{}" > ./package.json
+fi
+
+npm install --save gulp gulp-autoprefixer gulp-concat gulp-csso gulp-file gulp-rimraf gulp-sourcemaps gulp-stylus gulp-uglify
+npm install --save-dev browser-sync
+
+
+if [ ! -f "./.gitignore" ]
+then
+    touch ./.gitignore
+fi
+
+echo "\nnode_modules" >> ./.gitignore

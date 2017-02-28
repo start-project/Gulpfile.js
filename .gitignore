@@ -1,0 +1,8 @@
+*
+!.editorconfig
+!.gitignore
+!Gulpfile.js
+!Gulpfile.json
+!init
+!LICENSE
+!README.md
