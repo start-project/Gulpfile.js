@@ -3,6 +3,7 @@
 !.gitignore
 !Gulpfile.js
 !Gulpfile.json
+!index.html
 !init
 !LICENSE
 !README.md
